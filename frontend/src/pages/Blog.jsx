@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../lib/api';
 import ScrollFade from '../components/ScrollFade';
 
 const categories = ['Tất cả', 'Thuế', 'Kế toán', 'Kinh doanh'];
@@ -27,7 +27,7 @@ export default function Blog() {
     setLoading(true);
     const params = { page, limit };
     if (category !== 'Tất cả') params.category = category;
-    axios.get('/api/blog', { params })
+    api.get('/api/blog', { params })
       .then((r) => {
         setPosts(r.data.posts);
         setTotal(r.data.total);

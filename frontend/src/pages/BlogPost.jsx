@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../lib/api';
 
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
@@ -37,7 +37,7 @@ export default function BlogPost() {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    axios.get(`/api/blog/${slug}`)
+    api.get(`/api/blog/${slug}`)
       .then((r) => setPost(r.data))
       .catch(() => setNotFound(true))
       .finally(() => setLoading(false));

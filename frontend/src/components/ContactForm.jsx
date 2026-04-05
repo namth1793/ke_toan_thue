@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../lib/api';
 import { motion } from 'framer-motion';
 
 const services = [
@@ -24,7 +24,7 @@ export default function ContactForm({ title = 'Nhận tư vấn miễn phí', su
     setLoading(true);
     setStatus(null);
     try {
-      await axios.post('/api/contacts', form);
+      await api.post('/api/contacts', form);
       setStatus('success');
       setForm({ name: '', phone: '', email: '', service: '', message: '' });
     } catch {

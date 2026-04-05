@@ -8,14 +8,19 @@ require('./db/database');
 const app = express();
 const PORT = process.env.PORT || 5013;
 
-app.use(cors());
+// CORS: allow specific origin in production, all in development
+const corsOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(',').map((o) => o.trim())
+  : true;
+
+app.use(cors({ origin: corsOrigins, credentials: true }));
 app.use(express.json());
 
 app.use('/api/contacts', require('./routes/contacts'));
 app.use('/api/blog', require('./routes/blog'));
 app.use('/api/courses', require('./routes/courses'));
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.json({ message: 'Kế Toán Thuế Sao Việt API - Running OK', port: PORT });
 });
 

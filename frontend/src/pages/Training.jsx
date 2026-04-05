@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import axios from 'axios';
+import api from '../lib/api';
 import ScrollFade from '../components/ScrollFade';
 
 function formatPrice(price) {
@@ -24,7 +24,7 @@ function RegisterModal({ course, onClose }) {
     setLoading(true);
     setError('');
     try {
-      await axios.post(`/api/courses/${course.id}/register`, form);
+      await api.post(`/api/courses/${course.id}/register`, form);
       setSuccess(true);
     } catch {
       setError('Có lỗi xảy ra. Vui lòng thử lại.');
@@ -121,7 +121,7 @@ export default function Training() {
   const [selectedCourse, setSelectedCourse] = useState(null);
 
   useEffect(() => {
-    axios.get('/api/courses')
+    api.get('/api/courses')
       .then((r) => setCourses(r.data))
       .catch(() => {})
       .finally(() => setLoading(false));
