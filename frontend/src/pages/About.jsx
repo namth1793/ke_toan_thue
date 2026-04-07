@@ -3,32 +3,31 @@ import ScrollFade from '../components/ScrollFade';
 
 const team = [
   {
-    name: 'Nguyễn Thị Minh Châu',
-    role: 'Giám đốc & Kế toán trưởng',
-    avatar: 'https://picsum.photos/seed/chau/200/200',
-    desc: '15 năm kinh nghiệm kế toán doanh nghiệp. Cựu kiểm toán viên Big4. Chuyên gia thuế được công nhận.',
-    certs: ['CPA Việt Nam', 'ACCA Part Qualified'],
+    name: 'Phan Việt Hùng',
+    role: 'Founder & Giám đốc Điều hành',
+    avatar: 'https://picsum.photos/seed/hung2026/200/200',
+    desc: 'Người sáng lập SORATA Advisory. Tư vấn tài chính – kế toán với phương châm đồng hành thực sự, không chỉ xử lý số liệu.',
+    certs: ['Founder SORATA', 'Tư vấn Tài chính Doanh nghiệp'],
+    phone: '0977.457.676',
+    email: 'phanviethungtk@gmail.com',
   },
   {
-    name: 'Trần Văn Hoàng',
-    role: 'Trưởng phòng Thuế',
-    avatar: 'https://picsum.photos/seed/hoang/200/200',
-    desc: '12 năm kinh nghiệm tư vấn thuế. Chuyên xử lý các trường hợp hoàn thuế và thanh tra thuế phức tạp.',
-    certs: ['Chứng chỉ Tư vấn Thuế', 'Kế toán viên hành nghề'],
+    name: 'Nguyễn Thị Hà',
+    role: 'Trưởng phòng Vận hành',
+    avatar: 'https://picsum.photos/seed/ha2026/200/200',
+    desc: 'Phụ trách vận hành toàn bộ quy trình dịch vụ, đảm bảo mọi hồ sơ được xử lý đúng hạn và chính xác.',
+    certs: ['Quản lý Vận hành', 'Kế toán viên hành nghề'],
+    phone: '0352.355.060',
+    email: 'hanguyen.hmh@gmail.com',
   },
   {
-    name: 'Lê Thị Thu Hà',
-    role: 'Chuyên viên Kế toán cao cấp',
-    avatar: 'https://picsum.photos/seed/ha/200/200',
-    desc: '8 năm kinh nghiệm kế toán cho startup và SME. Thành thạo MISA, Fast Accounting, QuickBooks.',
-    certs: ['Thạc sỹ Kế toán', 'Chứng chỉ MISA'],
-  },
-  {
-    name: 'Phạm Quốc Dũng',
-    role: 'Chuyên viên Tư vấn Doanh nghiệp',
-    avatar: 'https://picsum.photos/seed/dung/200/200',
-    desc: '7 năm tư vấn thành lập doanh nghiệp. Hơn 200 công ty được hỗ trợ thành lập thành công.',
-    certs: ['Luật Kinh tế', 'Chứng chỉ Tư vấn Đầu tư'],
+    name: 'Nguyễn Thanh Nga',
+    role: 'Chuyên viên Kế toán',
+    avatar: 'https://picsum.photos/seed/nga2026/200/200',
+    desc: 'Chuyên xử lý kê khai thuế, hạch toán sổ sách và lập báo cáo tài chính. Thành thạo MISA và HTKK.',
+    certs: ['Chứng chỉ Kế toán', 'Chứng chỉ MISA'],
+    phone: '0988.655.191',
+    email: 'thanhnga.dng@gmail.com',
   },
 ];
 
@@ -70,16 +69,16 @@ export default function About() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <ScrollFade>
               <div className="inline-block bg-primary-50 text-primary-600 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Câu chuyện của chúng tôi</div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">Được thành lập từ niềm tin vào sự minh bạch</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">Không chỉ "làm xong" — chúng tôi đồng hành thực sự</h2>
               <div className="space-y-4 text-slate-600 leading-relaxed">
                 <p>
-                  Kế Toán Sao Việt được thành lập năm 2013 bởi bà Nguyễn Thị Minh Châu — một kế toán viên với 15 năm kinh nghiệm tại các tập đoàn lớn và công ty kiểm toán quốc tế.
+                  <strong className="text-slate-800">SORATA Advisory</strong> — viết tắt của <em>Solution-driven, Responsible, Aligned Together in Action</em> — được thành lập bởi Phan Việt Hùng với một mong muốn đơn giản: tạo ra dịch vụ kế toán mà khách hàng thực sự hiểu mình đang ở đâu về tài chính.
                 </p>
                 <p>
-                  Xuất phát từ nhu cầu thực tế của hàng nghìn doanh nghiệp nhỏ và vừa — thiếu nguồn lực để có kế toán chuyên nghiệp nhưng lại cần sự chính xác và đúng hạn — chúng tôi tạo ra một mô hình dịch vụ kế toán thuê ngoài với chi phí hợp lý nhất thị trường.
+                  Phần lớn dịch vụ kế toán trên thị trường chỉ "làm xong là xong" — nộp báo cáo, thu phí, rồi im lặng. Chúng tôi tin rằng một đối tác kế toán tốt phải giúp khách hàng <strong className="text-slate-800">nhận ra rủi ro sớm, hiểu số liệu của mình</strong>, và đưa ra quyết định kinh doanh tự tin hơn.
                 </p>
                 <p>
-                  Sau hơn 10 năm, chúng tôi tự hào đã phục vụ hơn 500 khách hàng từ các hộ kinh doanh nhỏ đến doanh nghiệp có doanh thu hàng trăm tỷ đồng — không một lần để khách hàng bị phạt thuế do lỗi của chúng tôi.
+                  Từ một đội nhỏ với từng khách hàng được chăm sóc trực tiếp, SORATA đang từng bước xây dựng nền tảng kế toán – tư vấn bền vững, hướng tới phục vụ hàng trăm doanh nghiệp Việt Nam đang phát triển.
                 </p>
               </div>
             </ScrollFade>
@@ -106,12 +105,27 @@ export default function About() {
 
               <div className="mt-6 grid grid-cols-1 gap-4">
                 <div className="bg-primary-50 border border-primary-100 rounded-xl p-5">
-                  <h4 className="font-bold text-primary-700 mb-2">🎯 Tầm nhìn</h4>
-                  <p className="text-slate-600 text-sm">Trở thành đối tác kế toán tin cậy số 1 cho doanh nghiệp nhỏ và vừa tại Việt Nam.</p>
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-7 h-7 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <svg className="w-4 h-4 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                    </div>
+                    <h4 className="font-bold text-primary-700">Tầm nhìn</h4>
+                  </div>
+                  <p className="text-slate-600 text-sm">Trở thành đối tác tư vấn tài chính – kế toán đáng tin cậy nhất cho các doanh nghiệp Việt Nam đang trên đà phát triển.</p>
                 </div>
                 <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5">
-                  <h4 className="font-bold text-indigo-700 mb-2">💎 Sứ mệnh</h4>
-                  <p className="text-slate-600 text-sm">Giúp mọi doanh nghiệp, dù nhỏ nhất, được tiếp cận dịch vụ kế toán chuyên nghiệp với chi phí hợp lý.</p>
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-7 h-7 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <svg className="w-4 h-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                      </svg>
+                    </div>
+                    <h4 className="font-bold text-indigo-700">Sứ mệnh</h4>
+                  </div>
+                  <p className="text-slate-600 text-sm">Giúp khách hàng thực sự hiểu tài chính của họ, nhận diện rủi ro kịp thời và đưa ra quyết định kinh doanh sáng suốt — không chỉ "làm xong là xong".</p>
                 </div>
               </div>
             </ScrollFade>
@@ -153,7 +167,7 @@ export default function About() {
             <h2 className="section-title">Đội ngũ chuyên gia</h2>
             <p className="section-subtitle">Mỗi thành viên đều có chứng chỉ hành nghề và kinh nghiệm thực tế sâu sắc.</p>
           </ScrollFade>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {team.map((member, i) => (
               <ScrollFade key={member.name} delay={i * 0.1}>
                 <div className="card p-6 text-center">
@@ -165,10 +179,24 @@ export default function About() {
                   <h3 className="font-bold text-slate-800 mb-1">{member.name}</h3>
                   <p className="text-primary-600 text-sm font-medium mb-3">{member.role}</p>
                   <p className="text-slate-500 text-xs leading-relaxed mb-4">{member.desc}</p>
-                  <div className="flex flex-wrap gap-1.5 justify-center">
+                  <div className="flex flex-wrap gap-1.5 justify-center mb-4">
                     {member.certs.map((c) => (
                       <span key={c} className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">{c}</span>
                     ))}
+                  </div>
+                  <div className="border-t border-slate-100 pt-3 space-y-1.5">
+                    <a href={`tel:${member.phone.replace(/\./g, '')}`} className="flex items-center justify-center gap-1.5 text-xs text-slate-500 hover:text-primary-600 transition-colors">
+                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                      {member.phone}
+                    </a>
+                    <a href={`mailto:${member.email}`} className="flex items-center justify-center gap-1.5 text-xs text-slate-500 hover:text-primary-600 transition-colors">
+                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      {member.email}
+                    </a>
                   </div>
                 </div>
               </ScrollFade>
