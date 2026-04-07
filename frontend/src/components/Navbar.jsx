@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import logo from '../../assets/logo.png';
 import AnnouncementBar from './AnnouncementBar';
 
 const navLinks = [
@@ -13,7 +14,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [announcementVisible, setAnnouncementVisible] = useState(true);
+  const [, setAnnouncementVisible] = useState(true);
   const location = useLocation();
 
   useEffect(() => {
@@ -44,16 +45,12 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2.5 group flex-shrink-0">
-              <div className="w-9 h-9 bg-gradient-to-br from-primary-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-md shadow-primary-200 group-hover:shadow-lg transition-shadow">
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 11h.01M12 11h.01M15 11h.01M4 19h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <div>
-                <div className="font-bold text-slate-800 leading-tight text-[15px] tracking-tight">Kế Toán Sao Việt</div>
-                <div className="text-[10px] text-slate-400 leading-tight hidden sm:block tracking-wide uppercase">Kế toán · Thuế · Doanh nghiệp</div>
-              </div>
+            <Link to="/" className="flex-shrink-0 group">
+              <img
+                src={logo}
+                alt="SORATA Advisory"
+                className="h-16 w-auto object-contain group-hover:opacity-90 transition-opacity"
+              />
             </Link>
 
             {/* Desktop nav */}

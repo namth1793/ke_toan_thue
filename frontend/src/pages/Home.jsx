@@ -7,10 +7,10 @@ import TrustLogos from '../components/TrustLogos';
 
 /* ─── Hero data ─────────────────────────────────────────────── */
 const heroStats = [
-  { value: '500+', label: 'Doanh nghiệp', icon: '🏢' },
-  { value: '10+', label: 'Năm kinh nghiệm', icon: '⭐' },
-  { value: '100%', label: 'Đúng hạn nộp thuế', icon: '✅' },
-  { value: '0đ', label: 'Phí phạt phát sinh', icon: '🛡️' },
+  { value: '500+', label: 'Doanh nghiệp' },
+  { value: '10+', label: 'Năm kinh nghiệm' },
+  { value: '100%', label: 'Đúng hạn nộp thuế' },
+  { value: '0đ', label: 'Phí phạt phát sinh' },
 ];
 
 const trustSignals = [
@@ -21,20 +21,90 @@ const trustSignals = [
 
 /* ─── Services ──────────────────────────────────────────────── */
 const services = [
-  { icon: '📋', title: 'Kê khai thuế GTGT', desc: 'Kê khai theo tháng/quý đúng hạn, nộp qua eTax, không phạt muộn.', from: '500.000đ/tháng', tag: 'Phổ biến' },
-  { icon: '📊', title: 'Kế toán trọn gói', desc: 'Hạch toán, sổ sách, báo cáo tài chính — không cần kế toán nội bộ.', from: '1.500.000đ/tháng', tag: '' },
-  { icon: '🏢', title: 'Thành lập công ty', desc: 'Hồ sơ đăng ký doanh nghiệp nhanh trong 5 ngày làm việc.', from: '1.000.000đ', tag: '' },
-  { icon: '🧾', title: 'Thuế TNDN', desc: 'Tối ưu thuế thu nhập doanh nghiệp hợp pháp, tiết kiệm đáng kể.', from: '500.000đ/tháng', tag: '' },
-  { icon: '💰', title: 'Hoàn thuế GTGT', desc: 'Lập hồ sơ hoàn thuế, theo dõi tiến trình, nhận hoàn thuế nhanh.', from: '2–5% số hoàn', tag: '' },
-  { icon: '💡', title: 'Tư vấn tài chính', desc: 'Kế hoạch thuế dài hạn, cơ cấu doanh nghiệp, vay vốn ngân hàng.', from: '500.000đ/buổi', tag: '' },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+    ),
+    title: 'Kê khai thuế GTGT', desc: 'Kê khai theo tháng/quý đúng hạn, nộp qua eTax, không phạt muộn.', from: '500.000đ/tháng', tag: 'Phổ biến',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    ),
+    title: 'Kế toán trọn gói', desc: 'Hạch toán, sổ sách, báo cáo tài chính — không cần kế toán nội bộ.', from: '1.500.000đ/tháng', tag: '',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    ),
+    title: 'Thành lập công ty', desc: 'Hồ sơ đăng ký doanh nghiệp nhanh trong 5 ngày làm việc.', from: '1.000.000đ', tag: '',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+    ),
+    title: 'Thuế TNDN', desc: 'Tối ưu thuế thu nhập doanh nghiệp hợp pháp, tiết kiệm đáng kể.', from: '500.000đ/tháng', tag: '',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z" />
+      </svg>
+    ),
+    title: 'Hoàn thuế GTGT', desc: 'Lập hồ sơ hoàn thuế, theo dõi tiến trình, nhận hoàn thuế nhanh.', from: '2–5% số hoàn', tag: '',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m1.636-6.364l.707.707M12 21v-1M5.636 17.364l.707-.707m10.021 0l.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+    ),
+    title: 'Tư vấn tài chính', desc: 'Kế hoạch thuế dài hạn, cơ cấu doanh nghiệp, vay vốn ngân hàng.', from: '500.000đ/buổi', tag: '',
+  },
 ];
 
 /* ─── Pain points ───────────────────────────────────────────── */
 const painPoints = [
-  { emoji: '😰', pain: 'Lo lắng bị phạt thuế', solution: 'Chúng tôi nộp đúng hạn 100%, cam kết không phát sinh phạt.' },
-  { emoji: '😵', pain: 'Không hiểu luật thuế', solution: 'Đội ngũ chuyên gia cập nhật luật liên tục, xử lý thay bạn.' },
-  { emoji: '💸', pain: 'Chi phí kế toán full-time cao', solution: 'Dịch vụ thuê ngoài tiết kiệm 70% so với tuyển dụng nội bộ.' },
-  { emoji: '⏰', pain: 'Mất thời gian làm giấy tờ', solution: 'Bàn giao tài liệu 1 lần, chúng tôi lo toàn bộ hàng tháng.' },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+    ),
+    pain: 'Lo lắng bị phạt thuế', solution: 'Chúng tôi nộp đúng hạn 100%, cam kết không phát sinh phạt.',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    pain: 'Không hiểu luật thuế', solution: 'Đội ngũ chuyên gia cập nhật luật liên tục, xử lý thay bạn.',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    pain: 'Chi phí kế toán full-time cao', solution: 'Dịch vụ thuê ngoài tiết kiệm 70% so với tuyển dụng nội bộ.',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    pain: 'Mất thời gian làm giấy tờ', solution: 'Bàn giao tài liệu 1 lần, chúng tôi lo toàn bộ hàng tháng.',
+  },
 ];
 
 /* ─── Testimonials ──────────────────────────────────────────── */
@@ -323,7 +393,7 @@ export default function Home() {
             {painPoints.map((p, i) => (
               <ScrollFade key={p.pain} delay={i * 0.1}>
                 <div className="flex gap-4 bg-white/5 hover:bg-white/10 transition-colors border border-white/10 rounded-2xl p-5">
-                  <div className="text-3xl flex-shrink-0">{p.emoji}</div>
+                  <div className="flex-shrink-0">{p.icon}</div>
                   <div>
                     <p className="font-semibold text-slate-300 text-sm mb-1 line-through decoration-slate-500">{p.pain}</p>
                     <p className="text-white text-sm leading-relaxed">
@@ -361,7 +431,7 @@ export default function Home() {
                   {s.tag && (
                     <span className="absolute top-4 right-4 bg-primary-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">{s.tag}</span>
                   )}
-                  <div className="text-3xl mb-4">{s.icon}</div>
+                  <div className="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center mb-4">{s.icon}</div>
                   <h3 className="font-bold text-slate-800 text-lg mb-2 group-hover:text-primary-600 transition-colors">{s.title}</h3>
                   <p className="text-slate-500 text-sm leading-relaxed mb-4">{s.desc}</p>
                   <div className="flex items-center justify-between">

@@ -10,10 +10,38 @@ const trustedBy = [
 ];
 
 const clientTypes = [
-  { icon: '🏪', label: 'Hộ kinh doanh', count: '120+' },
-  { icon: '🏢', label: 'Công ty TNHH', count: '250+' },
-  { icon: '🚀', label: 'Startup', count: '80+' },
-  { icon: '🏭', label: 'Doanh nghiệp vừa', count: '50+' },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.35 2.7A1 1 0 006.54 17H17M17 17a2 2 0 100 4 2 2 0 000-4zm-9 2a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+    ),
+    label: 'Hộ kinh doanh', count: '120+',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    ),
+    label: 'Công ty TNHH', count: '250+',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+    label: 'Startup', count: '80+',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
+      </svg>
+    ),
+    label: 'Doanh nghiệp vừa', count: '50+',
+  },
 ];
 
 export default function TrustLogos() {
@@ -43,7 +71,7 @@ export default function TrustLogos() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
               {clientTypes.map((c) => (
                 <div key={c.label} className="text-center">
-                  <div className="text-2xl mb-1">{c.icon}</div>
+                  <div className="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center mx-auto mb-2">{c.icon}</div>
                   <div className="text-xl font-bold text-primary-600">{c.count}</div>
                   <div className="text-xs text-slate-500">{c.label}</div>
                 </div>

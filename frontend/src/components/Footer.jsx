@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import logo from '../../assets/logo.png';
 
 export default function Footer() {
   return (
@@ -7,13 +8,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 bg-primary-600 rounded-lg flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 11h.01M12 11h.01M15 11h.01M4 19h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <span className="font-bold text-white text-base">Kế Toán Sao Việt</span>
+            <div className="mb-2">
+              <img
+                src={logo}
+                alt="SORATA Advisory"
+                className="h-14 w-auto object-contain brightness-0 invert"
+              />
             </div>
             <p className="text-sm leading-relaxed text-slate-400 mb-5">
               Công ty TNHH Dịch Vụ Kế Toán Thuế Sao Việt — đối tác tin cậy cho hàng trăm doanh nghiệp trên cả nước.
