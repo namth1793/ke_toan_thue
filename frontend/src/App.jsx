@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { SiteContentProvider } from './context/SiteContentContext';
+import { AdminAuthProvider } from './context/AdminAuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import FloatingCTA from './components/FloatingCTA';
@@ -9,11 +11,12 @@ import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import AdminLogin from './pages/admin/AdminLogin';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
-export default function App() {
+function PublicLayout() {
   return (
-    <BrowserRouter>
-      {/* Navbar includes the AnnouncementBar internally */}
+    <>
       <Navbar />
       <main>
         <Routes>
@@ -28,6 +31,22 @@ export default function App() {
       </main>
       <Footer />
       <FloatingCTA />
-    </BrowserRouter>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <AdminAuthProvider>
+      <SiteContentProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/*" element={<PublicLayout />} />
+          </Routes>
+        </BrowserRouter>
+      </SiteContentProvider>
+    </AdminAuthProvider>
   );
 }

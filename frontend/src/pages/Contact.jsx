@@ -45,7 +45,7 @@ export default function Contact() {
   return (
     <div className="pt-nav">
       {/* Header */}
-      <section className="bg-gradient-to-br from-primary-900 to-primary-700 text-white py-16">
+      <section className="bg-gradient-to-br from-primary-600 to-indigo-700 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollFade>
             <div className="inline-block bg-white/10 text-white text-sm font-medium px-4 py-1.5 rounded-full mb-4">Liên hệ</div>

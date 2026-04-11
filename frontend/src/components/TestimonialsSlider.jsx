@@ -1,35 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSiteContent } from '../context/SiteContentContext';
 
-const testimonials = [
-  {
-    name: 'Trần Minh Tuấn',
-    role: 'Giám đốc Công ty TNHH Tuấn Phát',
-    avatar: 'https://picsum.photos/seed/tuan/80/80',
-    content: 'Tôi đã dùng dịch vụ kế toán thuê ngoài của Sao Việt được 3 năm nay. Báo cáo tài chính luôn đúng hạn, không bao giờ bị phạt thuế muộn. Đội ngũ tư vấn rất chuyên nghiệp và nhiệt tình.',
-    stars: 5,
-  },
-  {
-    name: 'Nguyễn Thị Hoa',
-    role: 'Chủ hộ kinh doanh thời trang',
-    avatar: 'https://picsum.photos/seed/hoa/80/80',
-    content: 'Trước đây tôi rất lo lắng về việc kê khai thuế vì không hiểu gì cả. Từ khi có Sao Việt hỗ trợ, mọi thứ trở nên đơn giản hơn rất nhiều. Chi phí cũng rất hợp lý so với thị trường.',
-    stars: 5,
-  },
-  {
-    name: 'Lê Quốc Bảo',
-    role: 'Startup công nghệ — CEO & Co-founder',
-    avatar: 'https://picsum.photos/seed/bao/80/80',
-    content: 'Chúng tôi là startup giai đoạn đầu, ngân sách hạn chế. Sao Việt đã tư vấn gói dịch vụ phù hợp, giúp chúng tôi tiết kiệm đáng kể so với thuê kế toán full-time. Rất recommend!',
-    stars: 5,
-  },
-  {
-    name: 'Phạm Thị Lan',
-    role: 'Chủ nhà hàng — Nhà hàng Hương Quê',
-    avatar: 'https://picsum.photos/seed/lan/80/80',
-    content: 'Sao Việt giúp tôi thành lập công ty chỉ trong 5 ngày làm việc, tư vấn tối ưu thuế giúp tiết kiệm được vài chục triệu mỗi năm. Đội ngũ luôn sẵn sàng giải đáp mọi câu hỏi.',
-    stars: 5,
-  },
+const DEFAULT_ITEMS = [
+  { name: 'Trần Minh Tuấn', role: 'Giám đốc Công ty TNHH Tuấn Phát', avatar: 'https://picsum.photos/seed/tuan/80/80', content: 'Báo cáo tài chính luôn đúng hạn, không bao giờ bị phạt thuế muộn. Đội ngũ tư vấn rất chuyên nghiệp.', stars: 5 },
 ];
 
 function StarRating({ count }) {
@@ -46,11 +20,19 @@ function StarRating({ count }) {
 
 export default function TestimonialsSlider() {
   const [current, setCurrent] = useState(0);
+  const { content } = useSiteContent();
+  const testimonials = content?.home?.testimonials?.items || DEFAULT_ITEMS;
 
   useEffect(() => {
+    if (testimonials.length <= 1) return;
     const timer = setInterval(() => setCurrent((c) => (c + 1) % testimonials.length), 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [testimonials.length]);
+
+  useEffect(() => { setCurrent(0); }, [testimonials.length]);
+
+  if (!testimonials.length) return null;
+  const t = testimonials[current];
 
   return (
     <div className="relative">
@@ -65,38 +47,34 @@ export default function TestimonialsSlider() {
             className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8"
           >
             <div className="flex items-start gap-4 mb-4">
-              <img
-                src={testimonials[current].avatar}
-                alt={testimonials[current].name}
-                className="w-12 h-12 rounded-full object-cover flex-shrink-0"
-              />
+              {t.avatar ? (
+                <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full object-cover flex-shrink-0" />
+              ) : (
+                <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 font-bold flex-shrink-0">
+                  {t.name?.[0]}
+                </div>
+              )}
               <div>
-                <div className="font-semibold text-slate-800">{testimonials[current].name}</div>
-                <div className="text-sm text-slate-500">{testimonials[current].role}</div>
-                <StarRating count={testimonials[current].stars} />
+                <div className="font-semibold text-slate-800">{t.name}</div>
+                <div className="text-sm text-slate-500">{t.role}</div>
+                <StarRating count={t.stars || 5} />
               </div>
               <svg className="w-8 h-8 text-primary-100 ml-auto flex-shrink-0" fill="currentColor" viewBox="0 0 32 32">
                 <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
               </svg>
             </div>
-            <p className="text-slate-600 leading-relaxed italic">"{testimonials[current].content}"</p>
+            <p className="text-slate-600 leading-relaxed italic">"{t.content}"</p>
           </motion.div>
         </AnimatePresence>
       </div>
-
-      {/* Dots */}
-      <div className="flex justify-center gap-2 mt-5">
-        {testimonials.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrent(i)}
-            aria-label={`Testimonial ${i + 1}`}
-            className={`w-2.5 h-2.5 rounded-full transition-all ${
-              i === current ? 'bg-primary-600 w-6' : 'bg-slate-300 hover:bg-slate-400'
-            }`}
-          />
-        ))}
-      </div>
+      {testimonials.length > 1 && (
+        <div className="flex justify-center gap-2 mt-5">
+          {testimonials.map((_, i) => (
+            <button key={i} onClick={() => setCurrent(i)} aria-label={`Testimonial ${i + 1}`}
+              className={`h-2.5 rounded-full transition-all ${i === current ? 'bg-primary-600 w-6' : 'w-2.5 bg-slate-300 hover:bg-slate-400'}`} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

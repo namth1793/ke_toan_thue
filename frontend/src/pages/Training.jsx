@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '../lib/api';
 import ScrollFade from '../components/ScrollFade';
+import { useSiteContent } from '../context/SiteContentContext';
 
 function formatPrice(price) {
   return new Intl.NumberFormat('vi-VN').format(price) + 'đ';
@@ -115,10 +116,21 @@ function RegisterModal({ course, onClose }) {
   );
 }
 
+const DEFAULT_HEADER = { title: 'Khóa học kế toán & thuế', subtitle: 'Các khóa học thực tế từ chuyên gia 10+ năm kinh nghiệm. Học xong là làm được ngay.' };
+const DEFAULT_FEATURES = [
+  { icon: '👤', title: 'Giảng viên thực chiến', desc: 'Giảng viên là kế toán trưởng 10+ năm kinh nghiệm, không chỉ lý thuyết.' },
+  { icon: '💻', title: 'Thực hành ngay trên phần mềm', desc: 'Thực hành trực tiếp trên MISA, Fast, HTKK — phần mềm dùng thực tế.' },
+  { icon: '🏅', title: 'Cấp chứng chỉ hoàn thành', desc: 'Chứng chỉ có giá trị trong hồ sơ xin việc và thăng tiến.' },
+  { icon: '🔄', title: 'Học lại miễn phí', desc: 'Học sinh được phép học lại toàn bộ khoá học nếu cần ôn tập.' },
+];
+
 export default function Training() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const { content } = useSiteContent();
+  const header = content?.training?.header || DEFAULT_HEADER;
+  const features = content?.training?.features || DEFAULT_FEATURES;
 
   useEffect(() => {
     api.get('/api/courses')
@@ -130,14 +142,12 @@ export default function Training() {
   return (
     <div className="pt-nav">
       {/* Header */}
-      <section className="bg-gradient-to-br from-primary-900 to-primary-700 text-white py-16">
+      <section className="bg-gradient-to-br from-primary-600 to-indigo-700 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollFade>
             <div className="inline-block bg-white/10 text-white text-sm font-medium px-4 py-1.5 rounded-full mb-4">Đào tạo</div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Khóa học kế toán & thuế</h1>
-            <p className="text-blue-100 text-lg max-w-2xl mx-auto">
-              Các khóa học thực tế từ chuyên gia 10+ năm kinh nghiệm. Học xong là làm được ngay.
-            </p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">{header.title}</h1>
+            <p className="text-blue-100 text-lg max-w-2xl mx-auto">{header.subtitle}</p>
           </ScrollFade>
         </div>
       </section>
@@ -201,46 +211,13 @@ export default function Training() {
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollFade className="text-center mb-12">
-            <h2 className="section-title">Tại sao học tại Sao Việt?</h2>
+            <h2 className="section-title">Tại sao học tại SORATA?</h2>
           </ScrollFade>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: (
-                  <svg className="w-7 h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                ),
-                title: 'Giảng viên thực chiến', desc: 'Giảng viên là kế toán trưởng 10+ năm kinh nghiệm, không chỉ lý thuyết.',
-              },
-              {
-                icon: (
-                  <svg className="w-7 h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                ),
-                title: 'Thực hành ngay trên phần mềm', desc: 'Thực hành trực tiếp trên MISA, Fast, HTKK — phần mềm dùng thực tế.',
-              },
-              {
-                icon: (
-                  <svg className="w-7 h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                  </svg>
-                ),
-                title: 'Cấp chứng chỉ hoàn thành', desc: 'Chứng chỉ có giá trị trong hồ sơ xin việc và thăng tiến.',
-              },
-              {
-                icon: (
-                  <svg className="w-7 h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
-                ),
-                title: 'Học lại miễn phí', desc: 'Học sinh được phép học lại toàn bộ khoá học nếu cần ôn tập.',
-              },
-            ].map((item, i) => (
-              <ScrollFade key={item.title} delay={i * 0.1}>
+            {features.map((item, i) => (
+              <ScrollFade key={i} delay={i * 0.1}>
                 <div className="card p-6 text-center">
-                  <div className="w-14 h-14 bg-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-4">{item.icon}</div>
+                  <div className="w-14 h-14 bg-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl">{item.icon}</div>
                   <h3 className="font-bold text-slate-800 mb-2">{item.title}</h3>
                   <p className="text-slate-500 text-sm">{item.desc}</p>
                 </div>

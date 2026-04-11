@@ -19,6 +19,10 @@
     background-color: #ffffff;
     line-height: 1.6;
   }
+
+  img {
+    filter: brightness(1.06) saturate(1.12);
+  }
 }
 
 @layer components {
@@ -125,5 +129,5 @@
 
 /* ── Gradient radial background ──────────── */
 .bg-radial-primary {
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(37,99,235,0.06), transparent);
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(37,99,235,0.12), transparent);
 }
