@@ -3,7 +3,13 @@ const cors = require('cors');
 require('dotenv').config();
 
 // Initialize DB (creates tables + seeds if empty)
-require('./db/database');
+try {
+  require('./db/database');
+  console.log('✅ Database initialized');
+} catch (err) {
+  console.error('❌ Database initialization failed:', err.message);
+  process.exit(1);
+}
 
 const app = express();
 const PORT = process.env.PORT || 5013;
