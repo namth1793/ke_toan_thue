@@ -29,7 +29,7 @@ app.use('/api/admin', require('./routes/admin'));
 app.use('/api/admin/upload', require('./routes/upload'));
 
 app.get('/', (_req, res) => {
-  res.json({ message: 'SORATA Advisory API - Running OK', port: PORT });
+  res.json({ message: 'SORATA Advisory API - Running OK', port: PORT, version: 'v2-with-content' });
 });
 
 app.listen(PORT, () => {
