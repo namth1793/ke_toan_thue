@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import api from '../../lib/api';
-import { useAdminAuth } from '../../context/AdminAuthContext';
+import { useNavigate, Link } from 'react-router-dom';
 import logo from '../../../assets/logo.png';
+import { useAdminAuth } from '../../context/AdminAuthContext';
+import api from '../../lib/api';
 
 export default function AdminLogin() {
   const [form, setForm] = useState({ username: '', password: '' });
@@ -80,8 +80,13 @@ export default function AdminLogin() {
             </button>
           </form>
 
-          <div className="mt-6 pt-5 border-t border-slate-100 text-center">
-            <p className="text-xs text-slate-400">Tài khoản mặc định: admin / admin123</p>
+          <div className="mt-5 text-center">
+            <Link to="/" className="text-sm text-slate-500 hover:text-primary-600 transition-colors flex items-center justify-center gap-1.5">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Về trang chủ
+            </Link>
           </div>
         </div>
       </div>
