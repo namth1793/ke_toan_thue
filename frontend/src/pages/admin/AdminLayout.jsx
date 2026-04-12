@@ -11,6 +11,7 @@ const navItems = [
   { id: 'blog', label: 'Blog', icon: '📝', desc: 'Bài viết tin tức' },
   { id: 'about', label: 'Giới thiệu', icon: '🏢', desc: 'Đội ngũ, mốc thời gian, chứng chỉ' },
   { id: 'inbox', label: 'Hộp thư', icon: '📬', desc: 'Form liên hệ & đăng ký học' },
+  { id: 'changePassword', label: 'Đổi mật khẩu', icon: '🔑', desc: 'Cập nhật mật khẩu đăng nhập' },
 ];
 
 export default function AdminLayout({ children, activeSection, onSectionChange }) {

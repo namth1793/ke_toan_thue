@@ -9,6 +9,7 @@ import TrainingSection from './sections/TrainingSection';
 import BlogSection from './sections/BlogSection';
 import AboutSection from './sections/AboutSection';
 import InboxSection from './sections/InboxSection';
+import ChangePasswordSection from './sections/ChangePasswordSection';
 
 const SECTIONS = {
   settings: SettingsSection,
@@ -18,6 +19,7 @@ const SECTIONS = {
   blog: BlogSection,
   about: AboutSection,
   inbox: InboxSection,
+  changePassword: ChangePasswordSection,
 };
 
 export default function AdminDashboard() {
