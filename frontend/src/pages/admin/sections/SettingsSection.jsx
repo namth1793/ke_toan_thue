@@ -29,6 +29,45 @@ export default function SettingsSection() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState('');
+  const [exporting, setExporting] = useState(false);
+  const [backupMsg, setBackupMsg] = useState(null);
+
+  const handleExport = async () => {
+    setExporting(true);
+    try {
+      const res = await api.get('/api/admin/backup');
+      const json = JSON.stringify(res.data, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `saoviet-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch {
+      setBackupMsg({ ok: false, text: 'Xuất thất bại, thử lại.' });
+      setTimeout(() => setBackupMsg(null), 3000);
+    } finally {
+      setExporting(false);
+    }
+  };
+
+  const handleImport = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    try {
+      const text = await file.text();
+      const backup = JSON.parse(text);
+      await api.post('/api/admin/restore', backup);
+      await refreshContent();
+      setBackupMsg({ ok: true, text: '✅ Khôi phục thành công! Dữ liệu đã được nạp lại.' });
+      setTimeout(() => setBackupMsg(null), 5000);
+    } catch {
+      setBackupMsg({ ok: false, text: 'Nhập thất bại. Kiểm tra file JSON đúng định dạng.' });
+      setTimeout(() => setBackupMsg(null), 4000);
+    }
+    e.target.value = '';
+  };
 
   useEffect(() => {
     if (content?.settings) setData(JSON.parse(JSON.stringify(content.settings)));
@@ -143,6 +182,33 @@ export default function SettingsSection() {
           <Field label="Link nút CTA">
             <input className={INPUT} value={data.announcement.ctaLink} onChange={e => set('announcement.ctaLink', e.target.value)} placeholder="/lien-he" />
           </Field>
+        </div>
+      </div>
+
+      {/* Backup & Restore */}
+      <div className="bg-amber-50 rounded-2xl border border-amber-200 p-6 space-y-3">
+        <h2 className="font-semibold text-slate-800">💾 Sao lưu & Khôi phục dữ liệu</h2>
+        <p className="text-sm text-slate-500">
+          Xuất toàn bộ nội dung website (cài đặt, trang, bài viết, khóa học) ra file JSON.
+          Trước khi redeploy, hãy <strong>Xuất backup</strong> và sau khi deploy xong thì <strong>Nhập backup</strong> để khôi phục.
+        </p>
+        <div className="flex items-center gap-3 flex-wrap">
+          <button
+            onClick={handleExport}
+            disabled={exporting}
+            className="bg-slate-700 hover:bg-slate-800 text-white font-medium px-4 py-2 rounded-lg text-sm transition-colors flex items-center gap-2 disabled:opacity-60"
+          >
+            {exporting ? <><span className="w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin" />Đang xuất...</> : '⬇️ Xuất backup'}
+          </button>
+          <label className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2 rounded-lg text-sm transition-colors cursor-pointer flex items-center gap-2">
+            ⬆️ Nhập backup
+            <input type="file" accept=".json" className="hidden" onChange={handleImport} />
+          </label>
+          {backupMsg && (
+            <span className={`text-sm font-medium ${backupMsg.ok ? 'text-emerald-600' : 'text-red-500'}`}>
+              {backupMsg.text}
+            </span>
+          )}
         </div>
       </div>
 

@@ -3,7 +3,10 @@ const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
 
-const dataDir = path.join(__dirname, '..', 'data');
+// DATA_DIR env var lets you point to a Railway persistent volume:
+//   Railway dashboard → Service → Settings → Volumes → mount at e.g. /data
+//   then set env var DATA_DIR=/data
+const dataDir = process.env.DATA_DIR || path.join(__dirname, '..', 'data');
 if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 
 const db = new Database(path.join(dataDir, 'ke_toan_thue.db'));

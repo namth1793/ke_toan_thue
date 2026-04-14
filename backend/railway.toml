@@ -2,3 +2,17 @@
   startCommand = "node server.js"
   restartPolicyType = "ON_FAILURE"
   restartPolicyMaxRetries = 3
+
+# ─── PERSISTENT STORAGE (SQLite) ────────────────────────────────────────────
+# Để dữ liệu không mất sau mỗi lần redeploy, cần 2 bước trên Railway dashboard:
+#
+# 1. Thêm Volume:
+#    Railway Dashboard → Service → Settings → Volumes
+#    → Add Volume → Mount Path: /data
+#
+# 2. Thêm biến môi trường:
+#    Railway Dashboard → Service → Variables
+#    → DATA_DIR = /data
+#
+# Sau khi cấu hình, file SQLite sẽ lưu tại /data/ke_toan_thue.db (persistent).
+# Không cần thay đổi code gì thêm.

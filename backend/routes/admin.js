@@ -17,7 +17,7 @@ router.post('/login', (req, res) => {
   if (!admin || !bcrypt.compareSync(password, admin.password)) {
     return res.status(401).json({ error: 'Tên đăng nhập hoặc mật khẩu không đúng.' });
   }
-  const token = jwt.sign({ id: admin.id, username: admin.username, name: admin.name }, SECRET, { expiresIn: '24h' });
+  const token = jwt.sign({ id: admin.id, username: admin.username, name: admin.name }, SECRET, { expiresIn: '30d' });
   res.json({ token, name: admin.name });
 });
 
@@ -166,6 +166,69 @@ router.put('/courses/:id', auth, (req, res) => {
 router.delete('/courses/:id', auth, (req, res) => {
   db.prepare('DELETE FROM courses WHERE id = ?').run(req.params.id);
   res.json({ success: true });
+});
+
+// ─── BACKUP & RESTORE ─────────────────────────────────────────────────────────
+
+// GET /api/admin/backup — export toàn bộ dữ liệu ra JSON
+router.get('/backup', auth, (req, res) => {
+  const siteContent = db.prepare('SELECT section, data, updated_at FROM site_content').all()
+    .map(r => ({ section: r.section, data: JSON.parse(r.data), updated_at: r.updated_at }));
+  const blogPosts = db.prepare('SELECT * FROM blog_posts ORDER BY id ASC').all();
+  const courses = db.prepare('SELECT * FROM courses ORDER BY id ASC').all();
+
+  res.json({
+    version: 1,
+    exported_at: new Date().toISOString(),
+    site_content: siteContent,
+    blog_posts: blogPosts,
+    courses,
+  });
+});
+
+// POST /api/admin/restore — nhập lại từ file JSON backup
+router.post('/restore', auth, (req, res) => {
+  const { site_content, blog_posts, courses } = req.body;
+  if (!site_content && !blog_posts && !courses) {
+    return res.status(400).json({ error: 'File backup không hợp lệ.' });
+  }
+
+  try {
+    db.transaction(() => {
+      if (Array.isArray(site_content)) {
+        const updateContent = db.prepare(
+          'UPDATE site_content SET data = ?, updated_at = CURRENT_TIMESTAMP WHERE section = ?'
+        );
+        for (const item of site_content) {
+          updateContent.run(JSON.stringify(item.data), item.section);
+        }
+      }
+
+      if (Array.isArray(blog_posts)) {
+        db.prepare('DELETE FROM blog_posts').run();
+        const ins = db.prepare(
+          'INSERT INTO blog_posts (id, title, slug, excerpt, content, thumbnail, category, views, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        );
+        for (const p of blog_posts) {
+          ins.run(p.id, p.title, p.slug, p.excerpt || '', p.content || '', p.thumbnail || '', p.category || 'Kế toán', p.views || 0, p.created_at);
+        }
+      }
+
+      if (Array.isArray(courses)) {
+        db.prepare('DELETE FROM courses').run();
+        const ins = db.prepare(
+          'INSERT INTO courses (id, name, slug, duration, price, target, description, level, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        );
+        for (const c of courses) {
+          ins.run(c.id, c.name, c.slug, c.duration || '', c.price || 0, c.target || '', c.description || '', c.level || 'Cơ bản', c.created_at);
+        }
+      }
+    })();
+
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: 'Lỗi khôi phục: ' + err.message });
+  }
 });
 
 module.exports = router;
