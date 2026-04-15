@@ -115,35 +115,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Timeline */}
-      {milestones.length > 0 && (
-        <section className="py-20 bg-slate-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <ScrollFade className="text-center mb-12">
-              <h2 className="section-title">Hành trình phát triển</h2>
-            </ScrollFade>
-            <div className="relative">
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-primary-200" aria-hidden />
-              <div className="space-y-8">
-                {milestones.map((m, i) => (
-                  <ScrollFade key={i} delay={i * 0.1}>
-                    <div className="flex gap-6 items-start">
-                      <div className="w-16 flex-shrink-0 flex flex-col items-center">
-                        <div className="w-4 h-4 bg-primary-600 rounded-full border-2 border-white shadow-md z-10" />
-                      </div>
-                      <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-100 flex-1">
-                        <span className="inline-block bg-primary-100 text-primary-700 text-xs font-bold px-2.5 py-1 rounded-full mb-2">{m.year}</span>
-                        <p className="text-slate-700 text-sm font-medium">{m.event}</p>
-                      </div>
-                    </div>
-                  </ScrollFade>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Team */}
       {team.length > 0 && (
         <section className="py-20 bg-white">
