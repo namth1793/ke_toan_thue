@@ -348,8 +348,8 @@ if (contentCount === 0) {
     zaloPhone: '0977457676',
     email: 'phanviethungtk@gmail.com',
     hours: 'T2–T7: 8:00 – 17:30',
-    facebook: '#',
-    zalo: '#',
+    facebook: 'https://www.facebook.com/profile.php?id=100085227574244',
+    zalo: 'https://zalo.me/0977457676',
     youtube: '#',
     announcement: {
       visible: true,
@@ -509,6 +509,29 @@ if (contentCount === 0) {
   }));
 
   console.log('✅ Seeded site content (settings, home, services, about, training)');
+}
+
+// Migration: update social links if still placeholder
+const settingsRow = db.prepare("SELECT data FROM site_content WHERE section = 'settings'").get();
+if (settingsRow) {
+  const settings = JSON.parse(settingsRow.data);
+  let changed = false;
+  if (!settings.facebook || settings.facebook === '#') {
+    settings.facebook = 'https://www.facebook.com/profile.php?id=100085227574244';
+    changed = true;
+  }
+  if (!settings.zalo || settings.zalo === '#') {
+    settings.zalo = 'https://zalo.me/0977457676';
+    changed = true;
+  }
+  if (!settings.zaloPhone) {
+    settings.zaloPhone = '0977457676';
+    changed = true;
+  }
+  if (changed) {
+    db.prepare("UPDATE site_content SET data = ?, updated_at = CURRENT_TIMESTAMP WHERE section = 'settings'").run(JSON.stringify(settings));
+    console.log('✅ Migration: updated social links in settings');
+  }
 }
 
 module.exports = db;

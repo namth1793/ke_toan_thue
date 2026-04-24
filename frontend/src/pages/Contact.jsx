@@ -1,47 +1,67 @@
 import ScrollFade from '../components/ScrollFade';
 import ContactForm from '../components/ContactForm';
-
-const contactInfo = [
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
-    title: 'Địa chỉ',
-    lines: ['123 Nguyễn Văn Cừ, Phường 4', 'Quận 5, TP. Hồ Chí Minh'],
-  },
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-      </svg>
-    ),
-    title: 'Điện thoại',
-    lines: ['0977.457.676 (Phan Việt Hùng — Giám đốc)', '0352.355.060 (Nguyễn Thị Hà — Vận hành)'],
-  },
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    ),
-    title: 'Email',
-    lines: ['phanviethungtk@gmail.com', 'hanguyen.hmh@gmail.com'],
-  },
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    title: 'Giờ làm việc',
-    lines: ['Thứ 2 – Thứ 7: 8:00 – 17:30', 'Chủ nhật: 9:00 – 12:00 (hỗ trợ online)'],
-  },
-];
+import { useSiteContent } from '../context/SiteContentContext';
 
 export default function Contact() {
+  const { content } = useSiteContent();
+  const s = content?.settings || {};
+
+  const phone = s.phone || '0977.457.676';
+  const email = s.email || 'phanviethungtk@gmail.com';
+  const address = s.address || '123 Nguyễn Văn Cừ, Quận 5, TP. Hồ Chí Minh';
+  const hours = s.hours || 'T2–T7: 8:00 – 17:30';
+  const facebook = s.facebook && s.facebook !== '#' ? s.facebook : null;
+  const zalo = s.zalo && s.zalo !== '#' ? s.zalo : (s.zaloPhone ? `https://zalo.me/${s.zaloPhone}` : null);
+  const youtube = s.youtube && s.youtube !== '#' ? s.youtube : null;
+
+  const contactInfo = [
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      ),
+      title: 'Địa chỉ',
+      lines: [address],
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+        </svg>
+      ),
+      title: 'Điện thoại',
+      lines: [phone],
+      href: `tel:${phone.replace(/\./g, '')}`,
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      ),
+      title: 'Email',
+      lines: [email],
+      href: `mailto:${email}`,
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+      title: 'Giờ làm việc',
+      lines: [hours],
+    },
+  ];
+
+  const socials = [
+    facebook && { label: 'Facebook', color: 'bg-blue-600', href: facebook },
+    zalo && { label: 'Zalo', color: 'bg-sky-500', href: zalo },
+    youtube && { label: 'YouTube', color: 'bg-red-600', href: youtube },
+  ].filter(Boolean);
+
   return (
     <div className="pt-nav">
       {/* Header */}
@@ -73,35 +93,39 @@ export default function Contact() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-slate-800 mb-1">{info.title}</h4>
-                        {info.lines.map((line) => (
-                          <p key={line} className="text-slate-500 text-sm">{line}</p>
-                        ))}
+                        {info.lines.map((line) =>
+                          info.href ? (
+                            <a key={line} href={info.href} className="text-slate-500 text-sm hover:text-primary-600 transition-colors block">{line}</a>
+                          ) : (
+                            <p key={line} className="text-slate-500 text-sm">{line}</p>
+                          )
+                        )}
                       </div>
                     </div>
                   ))}
                 </div>
               </ScrollFade>
 
-              <ScrollFade delay={0.2}>
-                <div className="bg-primary-50 rounded-2xl p-6">
-                  <h4 className="font-bold text-primary-700 mb-3">Kết nối với chúng tôi</h4>
-                  <div className="flex gap-3">
-                    {[
-                      { label: 'Facebook', color: 'bg-blue-600', href: '#' },
-                      { label: 'Zalo', color: 'bg-sky-500', href: '#' },
-                      { label: 'YouTube', color: 'bg-red-600', href: '#' },
-                    ].map((s) => (
-                      <a
-                        key={s.label}
-                        href={s.href}
-                        className={`${s.color} text-white text-xs font-medium px-3 py-2 rounded-lg hover:opacity-90 transition-opacity`}
-                      >
-                        {s.label}
-                      </a>
-                    ))}
+              {socials.length > 0 && (
+                <ScrollFade delay={0.2}>
+                  <div className="bg-primary-50 rounded-2xl p-6">
+                    <h4 className="font-bold text-primary-700 mb-3">Kết nối với chúng tôi</h4>
+                    <div className="flex gap-3">
+                      {socials.map((s) => (
+                        <a
+                          key={s.label}
+                          href={s.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`${s.color} text-white text-xs font-medium px-3 py-2 rounded-lg hover:opacity-90 transition-opacity`}
+                        >
+                          {s.label}
+                        </a>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </ScrollFade>
+                </ScrollFade>
+              )}
 
               {/* Map placeholder */}
               <ScrollFade delay={0.3}>
@@ -111,7 +135,7 @@ export default function Contact() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <p className="text-sm">123 Nguyễn Văn Cừ, Q5, TP.HCM</p>
+                    <p className="text-sm">{address}</p>
                     <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="text-primary-600 text-xs hover:underline mt-1 inline-block">
                       Xem trên Google Maps →
                     </a>
@@ -140,13 +164,13 @@ export default function Contact() {
             <h2 className="text-2xl font-bold text-slate-800 mb-3">Cần hỗ trợ ngay?</h2>
             <p className="text-slate-500 mb-6">Gọi trực tiếp để được tư vấn nhanh nhất.</p>
             <a
-              href="tel:0977457676"
+              href={`tel:${phone.replace(/\./g, '')}`}
               className="btn-primary text-lg px-8 py-4 mx-auto"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
-              Gọi ngay 0977.457.676
+              Gọi ngay {phone}
             </a>
           </ScrollFade>
         </div>
